@@ -16,6 +16,11 @@ function normalizeMath(md) {
   return md.replace(/^[ \t]*\$\$(.*)\$\$[ \t]*$/gm, (_, body) => `\n$$\n${body.trim()}\n$$\n`)
 }
 
+// ページ先頭の H1 はヘッダ（page-title）と重複するので落とす。
+function stripLeadingH1(md) {
+  return md.replace(/^\s*#\s+[^\n]*\r?\n+/, '')
+}
+
 function slug(s) {
   return String(s)
     .trim()
@@ -168,7 +173,7 @@ function Dashboard() {
 function DerivationPage({ id }) {
   const page = PAGE_BY_ID[id]
   const [active, setActive] = useState('')
-  const md = useMemo(() => normalizeMath(page.body), [page.body])
+  const md = useMemo(() => normalizeMath(stripLeadingH1(page.body)), [page.body])
   const blocks = useMemo(() => splitContent(md), [md])
   const toc = useMemo(() => buildToc(md), [md])
   const sec = SECTION_BY_KEY[page.sectionKey]
