@@ -26,6 +26,17 @@ function parseFrontmatter(raw) {
   return { data, body: m[2] }
 }
 
+// 演習（個別事例・応用）の id 集合。ここに無いものは「基本」（支配方程式・定義）。
+// 区分の根拠: knowledge/notes/院試/導出リスト_流体力学.md の「基本/演習 区分」（2026-06-24）。
+export const PRACTICE_IDS = new Set([
+  'jet-plate', 'jet-180', 'rotor-thrust', 'shallow-wave',
+  'pitot', 'torricelli', 'extended-bernoulli',
+  'couette', 'poiseuille-plates', 'hagen-poiseuille', 'film-flow',
+  'momentum-deficit', 'magnus',
+  'cylinder-flow', 'kutta-joukowski', 'joukowski-transform',
+])
+export const tierOf = (id) => (PRACTICE_IDS.has(id) ? '演習' : '基本')
+
 const modules = import.meta.glob('./content/**/*.md', {
   query: '?raw',
   import: 'default',
@@ -47,6 +58,7 @@ for (const [path, raw] of Object.entries(modules)) {
     formula: data.formula || '',
     issue: data.issue || '',
     year: data.year || '',
+    tier: tierOf(id),
     prereq: Array.isArray(data.prereq) ? data.prereq : data.prereq ? [data.prereq] : [],
     body,
   })
