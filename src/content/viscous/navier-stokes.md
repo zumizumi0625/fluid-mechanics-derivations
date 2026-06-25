@@ -22,6 +22,8 @@ prereq: [continuity, shear-stress]
 
 密度 $\rho$（非圧縮で一定とする）、速度場 $\mathbf{u}=(u,v,w)$、圧力 $p$。粘性係数 $\mu$ は一定のニュートン流体。微小直方体 $dV=dx\,dy\,dz$ のかたまりに注目し、質量は $\rho\,dV$。
 
+**この導出の出発点は2つだけ** — ①**運動量保存**（ニュートンの第2法則 $m\mathbf{a}=\mathbf{F}$）と、②せん断応力をひずみ速度で結ぶ**ニュートン流体の構成則** $\tau=\mu\,\partial u/\partial y$（[[shear-stress]]）。新しい物理は足さず、この2つを微小体積に当てて力を圧力・粘性・重力に分けるだけで NS が出る。
+
 ## ステップ1: 加速度＝物質微分（左辺）
 
 速度 $\mathbf{u}(x,y,z,t)$ は場所と時刻の関数。粒子は動きながら場所を変えるので、その加速度は単なる $\partial\mathbf{u}/\partial t$ ではなく、**移動による変化**も足した**物質微分** $\dfrac{D\mathbf{u}}{Dt}$ になる:
@@ -96,5 +98,10 @@ $$
 $$
 
 この消し方こそ次ページ以降の主役。残るのは「粘性項＝圧力勾配（または重力）」の単純な2階常微分方程式になる。
+
+## つながり
+
+- **🧱 材力（構成則・弾性平衡との対比）**: 静的な固体のつり合いは $\nabla\cdot\boldsymbol{\sigma}+\rho\mathbf{g}=0$（応力テンソルの発散＝外力）。材力はここに応力をひずみで結ぶ構成則 $\sigma=E\varepsilon$ を入れるが、流体は応力を**ひずみ速度**で結ぶ $\tau=\mu\,\partial u/\partial y$ を入れる。NSの粘性項 $\mu\nabla^2\mathbf{u}$ は「弾性平衡の構成則を“変位勾配→速度勾配”に置き換えた」流体版で、流れを止めれば（$\mathbf{u}\to0$）静的なつり合いに戻る。
+- **🔥⚡ 拡散方程式の同型**: 圧力勾配を外して非定常にすると $\dfrac{\partial \mathbf{u}}{\partial t}=\nu\nabla^2\mathbf{u}$（動粘度 $\nu=\mu/\rho$）。これは熱伝導 $\dfrac{\partial T}{\partial t}=\alpha\nabla^2T$（熱拡散率 $\alpha$）や磁場拡散 $\dfrac{\partial \mathbf{B}}{\partial t}=\eta\nabla^2\mathbf{B}$ と**全く同じ拡散方程式**。$\nu,\ \alpha,\ \eta$ が同じ「拡散率」の役で、運動量・熱・磁場が同じ数学でならされていく。次ページ以降の[クエット](#/couette)・[ポアズイユ](#/poiseuille-plates)はこの拡散の定常解にあたる。
 
 > **ポイント**: NSは結局 $m\mathbf{a}=\mathbf{F}$。左辺＝慣性、右辺＝圧力・粘性・重力、と暗記より分解で覚える。試験では「定常・完全発達・平行流」でどの項がなぜ消えるかを毎回言えるかが勝負。消した後に残る式は $\mu\,d^2u/dy^2=dp/dx$ の形ばかり。
