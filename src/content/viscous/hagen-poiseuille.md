@@ -26,6 +26,8 @@ prereq: [navier-stokes]
 - 圧力勾配 $\dfrac{dp}{dx}<0$ 一定、定常・完全発達
 - 長さ $L$・半径 $r$ の同軸円柱を検査体積にとる
 
+**出発点は運動量保存（同軸円柱の力のつり合い）＋構成則 $\tau=\mu\,du/dr$ のふたつ。** [ナビエ・ストークス方程式](#/navier-stokes) を円柱座標で解くのと中身は同じで、新しい物理は足さず「力のつり合い→構成則を代入→積分」と進めるだけ。
+
 @@FIG:hp-profile@@
 
 ## ステップ1: 同軸円柱の力のつり合い
@@ -56,7 +58,7 @@ $$
 
 ## ステップ3: ニュートン流体の構成則を入れる
 
-$\tau=\mu\,du/dr$（[[shear-stress]]）。$u$ は外ほど遅いので $du/dr<0$、応力の大きさは $|\tau|=-\mu\,du/dr$。ステップ2と等しいと置く:
+$\tau=\mu\,du/dr$（[せん断応力](#/shear-stress)）。$u$ は外ほど遅いので $du/dr<0$、応力の大きさは $|\tau|=-\mu\,du/dr$。ステップ2と等しいと置く:
 
 $$
 -\mu\frac{du}{dr}=\frac{r}{2}\left(-\frac{dp}{dx}\right)\quad\Longrightarrow\quad \frac{du}{dr}=\frac{1}{2\mu}\frac{dp}{dx}\,r
@@ -94,7 +96,7 @@ $$
 \boxed{\;Q=\frac{\pi a^4}{8\mu}\left(-\frac{dp}{dx}\right)\;}
 $$
 
-**流量は半径の4乗 $a^4$ に比例**。平均速度は $\bar u=\dfrac{Q}{\pi a^2}=\dfrac{a^2}{8\mu}\left(-\dfrac{dp}{dx}\right)=\dfrac{1}{2}u_{\max}$（平板の $2/3$ と違うことに注意）。
+**流量は半径の4乗 $a^4$ に比例**。平均速度は $\bar u=\dfrac{Q}{\pi a^2}=\dfrac{a^2}{8\mu}\left(-\dfrac{dp}{dx}\right)=\dfrac{1}{2}u_{\max}$（[平板](#/poiseuille-plates)の $2/3$ と違うことに注意）。
 
 ### 壁面せん断応力
 
@@ -103,5 +105,10 @@ $$
 $$
 \tau_0=\frac{a}{2}\left(-\frac{dp}{dx}\right)
 $$
+
+## つながり
+
+- **🧱 材力（線形応力分布＝ねじり）**: 同軸円柱の力のつり合いから出た $|\tau(r)|=\dfrac{r}{2}\left(-\dfrac{dp}{dx}\right)$ は中心0・壁最大で**半径に比例する応力**。これは材力の丸棒のねじり $\tau=\dfrac{T r}{I_p}$（$\tau\propto r$）と同じ線形分布で、そこへ応力をひずみ速度で結ぶ構成則 $\tau=\mu\,du/dr$ を入れるのが流体版。
+- **🔥⚡ 拡散方程式の同型**: 軸対称の $\dfrac{1}{r}\dfrac{d}{dr}\!\left(r\dfrac{du}{dr}\right)=\text{const}$ は、円柱状に一様発熱する定常熱伝導と同型で温度も放物線になる。$Q\propto a^4$ の強い径依存は断面積分の重み $r\,dr$ から来るもので、同じ円形でも電線の抵抗（$\propto 1/a^2$）とは効き方が違う、と対比すると効く。平板版は[ポアズイユ](#/poiseuille-plates)（$h^3$ 依存）。
 
 > **ポイント**: $Q\propto a^4$ が最重要。管径が2倍なら流量は16倍 — 血管の収縮や細管の詰まりが流れを激変させる理由。平板は $h^3$・$\bar u=\tfrac23 u_{\max}$、円管は $a^4$・$\bar u=\tfrac12 u_{\max}$、と対で暗記。導出は「同軸円柱の力のつり合い → $\tau=\mu u'$ を代入 → 積分」の3手。
