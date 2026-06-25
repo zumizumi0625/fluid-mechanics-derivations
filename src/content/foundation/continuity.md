@@ -19,9 +19,11 @@ issue: 357
 
 ## 設定
 
+出発点は**質量保存則**ひとつ。新しい物理は何も持ち込まず、「固定した検査体積に出入りする質量の収支」だけを式にする、という方針をまず宣言しておく。
+
 空間に固定した微小直方体 $dx\,dy\,dz$（検査体積 $dV$）を考える。密度 $\rho$、速度 $\mathbf{u}=(u,v,w)$ はいずれも位置と時刻の関数とする。
 
-## ステップ1: x方向の質量出入り（微小時間 $dt$ あたり）
+## ステップ1: x方向の質量出入り（単位時間あたり）
 
 面 $dy\,dz$ を単位時間に通過する質量流量は $(\rho u)\times(\text{面積})$。左面と右面で:
 
@@ -34,7 +36,7 @@ $$
 
 ## ステップ2: x方向の正味流出
 
-流出から流入を引き、テイラー展開 $\rho u|_{x+dx} = \rho u|_x + \dfrac{\partial(\rho u)}{\partial x}dx$ を使う:
+流出から流入を引き、テイラー展開 $\rho u|_{x+dx} = \rho u|_x + \dfrac{\partial(\rho u)}{\partial x}dx$（$dx$ が微小なので1次の項まで）を使う:
 
 $$
 \big[\rho u\big|_{x+dx} - \rho u\big|_x\big]\,dy\,dz = \frac{\partial(\rho u)}{\partial x}\,\underbrace{dx\,dy\,dz}_{dV}
@@ -73,5 +75,11 @@ $\partial\rho/\partial t=0$ かつ $\rho$ を発散の外に出せるので:
 $$
 \nabla\cdot\mathbf{u} = \frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}+\frac{\partial w}{\partial z} = 0
 $$
+
+## つながり
+
+- **🔥 熱力**: これは熱力で開放系（検査体積）にエネルギー収支を立てる前段の**質量保存**そのもの。質量流量 $\dot m=\rho u A$ の出入りを数える発想は、定常開放系で $\dot m_\text{in}=\dot m_\text{out}$ と置く連続式と同型で、保存量を「質量」から「エネルギー」に差し替えれば第一法則になる。
+- **⚡ 電磁気**: 形が**電荷保存（連続の式）** $\dfrac{\partial \rho_e}{\partial t}+\nabla\cdot\mathbf{J}=0$ と完全に同じ。密度 $\rho\leftrightarrow$ 電荷密度 $\rho_e$、質量流束 $\rho\mathbf{u}\leftrightarrow$ 電流密度 $\mathbf{J}$ が対応する。「保存量は湧き出さない（発散＝時間変化の符号反転）」という構造は分野を問わず同じ。
+- **🌀 流体内**: 非圧縮版 $\nabla\cdot\mathbf{u}=0$ は、この後の[ナビエ・ストークス](#/navier-stokes)や[クエット流れ](#/couette)で速度成分を絞り込む最初の拘束になる。
 
 > **ポイント**: 「固定した箱に出入りする質量を数える → 保存」で出る。非圧縮は "湧き出しゼロ" の意味。以降のクエット／ポアズイユ流れでも、まずこの式で速度成分の関係を絞り込む。
